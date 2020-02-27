@@ -127,7 +127,7 @@ async fn main() -> std::io::Result<()> {
             .service(delete_memo)
             .service(fs::Files::new("/static", "static").show_files_listing())
     })
-    .bind(("127.0.0.1", port))?
+    .bind(("0.0.0.0", port))?
     .run()
     .await
 }
