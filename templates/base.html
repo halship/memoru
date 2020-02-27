@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - Memoru</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <nav>
+        <h1><a href="/">Memoru</a></h1>
+    </nav>
+    <div id="content">{% block content %}{% endblock %}</div>
+
+    {% block script %}{% endblock %}
+</body>
+
+</html>

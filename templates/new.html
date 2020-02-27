@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}New{% endblock %}
+
+{% block content %}
+<div id="error-message">メモの作成に失敗しました</div>
+<form>
+    <textarea id="body" cols="30" rows="10"></textarea>
+    <button type="button" id="btn-post">Post</button>
+</form>
+{% endblock %}
+
+{% block script %}
+<script>
+    document.getElementById('btn-post').addEventListener('click', event => {
+        const body = document.getElementById('body').value;
+        fetch('/memos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                body: body
+            })
+        }).then(response => {
+            if (response.ok) {
+                document.location = '/';
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+            }
+        });
+    });
+</script>
+{% endblock %}

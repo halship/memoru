@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Edit{% endblock %}
+
+{% block content %}
+<div id="error-message"></div>
+<form id="form-delete">
+    <button type="button" id="btn-delete">Delete</button>
+</form>
+<form>
+    <textarea id="body" cols="30" rows="10">{{ memo.body }}</textarea>
+    <input type="hidden" id="id" value="{{ memo.id }}">
+    <button type="button" id="btn-update">Update</button>
+</form>
+{% endblock %}
+
+{% block script %}
+<script>
+    document.getElementById('btn-delete').addEventListener('click', event => {
+        const id = document.getElementById('id').value;
+        const body = document.getElementById('body').value;
+        fetch(`/memos/${id}`, {
+            method: 'DELETE'
+        }).then(response => {
+            if (response.ok) {
+                document.location = '/';
+            } else {
+                const mes = document.getElementById('error-message');
+                mes.textContent = 'メモの更新に失敗しました';
+                mes.style.display = 'block';
+            }
+        });
+    });
+
+    document.getElementById('btn-update').addEventListener('click', event => {
+        const id = document.getElementById('id').value;
+        const body = document.getElementById('body').value;
+        fetch(`/memos/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                body: body
+            })
+        }).then(response => {
+            if (response.ok) {
+                document.location = '/';
+            } else {
+                const mes = document.getElementById('error-message');
+                mes.textContent = 'メモの削除に失敗しました';
+                mes.style.display = 'block';
+            }
+        });
+    });
+</script>
+{% endblock %}

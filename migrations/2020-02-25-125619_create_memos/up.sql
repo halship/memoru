@@ -1,0 +1,4 @@
+CREATE TABLE memos (
+    id SERIAL PRIMARY KEY,
+    body TEXT NOT NULL
+)

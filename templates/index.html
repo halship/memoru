@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+
+{% block content %}
+<ul id="toolbar">
+    <li><a href="/new">New</a></li>
+</ul>
+<ul id="memos">
+    {% for memo in memos %}
+    <li><a href="/{{ memo.id }}">{{ memo.body|linebreaksbr|e }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
